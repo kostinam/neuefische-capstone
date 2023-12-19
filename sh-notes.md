@@ -1,21 +1,10 @@
-First week:
--	Who ist he stakeholder?
--	What is our scenario?
--	How do we gather our data?
--	How do you organize things?
-Roles:
--	Matthias is stakeholder
--	Alex ist teamlead assist
-Stakeholder meetings are on Wednesday
--	Why: Purpose of project
--	What: 
--	How: plan + steps
 Questions -> ask-questions; also: @analytics-coaches
 Random:
 -	db setup (own schema via slack will be send soon)
--	Tableau Creator License -> wollen wir, nicht!? Email-Adresse, die wir genutzt haben
-
+presentation:
+- screenshare via teamviewer, etc. to give the speaker the ability to switch slides
 ToDo:
 -	Last step: create own repository
--	Move files into
--	Push
+  -	Move files into
+  -	Push
+  - data stored as CSV muss raus dem data folder bzw. den doch auf git pushen
