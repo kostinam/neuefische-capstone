@@ -8,26 +8,39 @@ data_dir = './data'
 
 # -----------------------------------------------------------------------------
 
-def get_file_path(file_name: str, check_exist: bool = False) -> str:
+def get_file_path(
+          file_name: str
+        , sub_dir: str = ''
+        , check_exist: bool = False
+    ) -> str:
     '''
-    returns full file path to 'file_name' (stored inside of 'data_dir'), also
-    checks existance depending on 'check_exist' and returns '' on fail
+    returns full file path to 'file_name' (stored inside of 'sub_dir' inside 
+    of 'data_dir'), also checks existance depending on 'check_exist' and
+    returns '' on fail
     '''
-    file_path = os.path.join(data_dir, file_name)
+    file_path = os.path.join(data_dir, sub_dir, file_name)
     if not check_exist or os.path.isfile(file_path):
         return file_path
     else:
         return ''
 
-def download_file(url: str, file_name: str = '') -> str:
+def download_file(
+          url: str
+        , sub_dir: str = ''
+        , file_name: str = ''
+    ) -> str:
     '''
     downloads 'url' and stores it as 'file_name' (or one extracted from url)
-    into 'data_dir'; returns 'file_name' after successful save, '' otherwise
+    into 'sub_dir' inside 'data_dir'; returns 'file_name' after successful
+    saveing or '' otherwise
     '''
     # obtain 'file_name' from 'url', if not given
     if file_name == '': file_name = os.path.basename(url)
     # create full path to file
-    file_path = get_file_path(file_name)
+    file_path = get_file_path(file_name, sub_dir, False)
+    # create sub-directory, if not exist
+    if not os.path.exists(os.path.dirname(file_path)):
+        os.makedirs(os.path.dirname(file_path))
     # test and recieve file from 'url', store as 'file_name'
     try:
         response = requests.head(url)
@@ -45,13 +58,17 @@ def download_file(url: str, file_name: str = '') -> str:
         print('ERROR! download failed:', e)
         return ''
 
-def unzip_file(file_name: str) -> list[str]:
+def unzip_file(
+          file_name: str
+        , sub_dir: str = ''
+    ) -> list[str]:
     '''
-    unzips all contents of 'file_name' (stored inside of 'data_dir') into its
-    parent directory; returns list of extracted files or '[]' on fail
+    unzips all contents of 'file_name' (stored inside of 'sub_dir' inside of
+    'data_dir') into its parent directory; returns list of extracted files or
+    '[]' on fail
     '''
     # create full path to file, ensure it exists
-    file_path = get_file_path(file_name, check_exist=True)
+    file_path = get_file_path(file_name, sub_dir, check_exist=True)
     if not file_path:
         print('ERROR! file does not exist:', file_path)
         return []
