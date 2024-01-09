@@ -39,7 +39,7 @@ def download_file(url: str, file_name: str = '') -> str:
             with open(file_path, mode='wb') as file:
                 for chunk in response.iter_content(chunk_size=1024 * 1024):
                     file.write(chunk)
-            print('file downloaded:', file_name)
+            print('+ file downloaded:', file_name)
             return file_name
     except Exception as e:
         print('ERROR! download failed:', e)
@@ -60,7 +60,7 @@ def unzip_file(file_name: str) -> list[str]:
         with zipfile.ZipFile(file_path, 'r') as zip_file:
             zip_file_contents = zip_file.namelist()
             zip_file.extractall(os.path.dirname(file_path))
-            print('files extracted:', zip_file_contents)
+            print('+ files extracted:', zip_file_contents)
             return zip_file_contents
     except zipfile.BadZipFile:
         print('ERROR! not a zip or a corrupted zip file')

@@ -1,6 +1,7 @@
 import os
 import pandas
 import sqlalchemy
+import psycopg2
 
 from sqlalchemy.engine.base import Engine
 from dotenv import dotenv_values
@@ -58,3 +59,26 @@ def get_dataframe(sql_query: str) -> pandas.DataFrame:
     PostgreSQL database (configured via 'env_file'); error handling is omitted
     '''
     return pandas.read_sql_query(sql=sql_query, con=get_engine())
+
+def write_dataframe(
+      dataframe: pandas.DataFrame
+    , table: str
+    , mode: str = 'replace'
+    , index: bool = False
+) -> None:
+    '''
+    writes the given pandas dataframe to the PostgreSQL database (configured
+    via 'env_file'); returns 'True'/'False' representing success/failure 
+    '''
+    try:
+        dataframe.to_sql(
+              name = table
+            , if_exists = mode
+            , index = index
+            , con = get_engine()
+            , chunksize = 5000
+            , method = 'multi'
+        )
+        print('+ table written:', table)
+    except (Exception, psycopg2.DatabaseError) as e:
+        print('ERROR! table write failed:', e)
