@@ -68,7 +68,7 @@ def write_dataframe(
 ) -> None:
     '''
     writes the given pandas dataframe to the PostgreSQL database (configured
-    via 'env_file'); returns 'True'/'False' representing success/failure 
+    via 'env_file') 
     '''
     try:
         dataframe.to_sql(
