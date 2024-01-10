@@ -12,7 +12,8 @@ env_file = './.env'
 
 # -----------------------------------------------------------------------------
 
-def get_sql_config() -> dict:
+def get_sql_config(
+) -> dict:
     '''
     loads credentials and parameters from 'env_file'; returns a dictionary
     containing those needed further on, False otherwise
@@ -35,7 +36,8 @@ def get_sql_config() -> dict:
             key: dotenv_dict[key] for key in needed_keys if key in dotenv_dict
         }
 
-def get_engine() -> Engine:
+def get_engine(
+) -> Engine:
     '''
     returns sqlalchemy connection engine for the PostgreSQL database
     (configured via 'env_file'); error handling is omitted
@@ -45,7 +47,9 @@ def get_engine() -> Engine:
         , connect_args=get_sql_config()
     )
 
-def get_data(sql_query: str) -> list:
+def get_data(
+    sql_query: str
+) -> list:
     '''
     returns the result as a list after running sql_query on the PostgreSQL
     database (configured via 'env_file'); error handling is omitted
@@ -53,7 +57,9 @@ def get_data(sql_query: str) -> list:
     with get_engine().begin() as connection:
         return connection.execute(sql_query).fetchall()
 
-def get_dataframe(sql_query: str) -> pandas.DataFrame:
+def get_dataframe(
+    sql_query: str
+) -> pandas.DataFrame:
     '''
     returns the result as a pandas dataframe after running sql_query on the
     PostgreSQL database (configured via 'env_file'); error handling is omitted
