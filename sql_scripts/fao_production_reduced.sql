@@ -97,8 +97,7 @@ FROM
 			ELSE '-'
 		END AS producing_animals_slaughtered_unit,
 		CASE
-			WHEN ELEMENT = 'Production'
-			AND unit = 't' THEN value
+			WHEN ELEMENT = 'Production' AND unit = 't' THEN value
 			ELSE 0
 		END AS production,
 		CASE
