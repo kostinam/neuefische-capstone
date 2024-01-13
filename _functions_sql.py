@@ -47,6 +47,16 @@ def get_engine(
         , connect_args=get_sql_config()
     )
 
+def run_command(
+    sql_command: str
+) -> None:
+    '''
+    runs the given command on the PostgreSQL database (configured via
+    'env_file'); return & error handling is omitted
+    '''
+    with get_engine().begin() as connection:
+        connection.execute(sql_command)
+
 def get_data(
     sql_query: str
 ) -> list:
@@ -74,7 +84,7 @@ def write_dataframe(
 ) -> None:
     '''
     writes the given pandas dataframe to the PostgreSQL database (configured
-    via 'env_file') 
+    via 'env_file')
     '''
     try:
         dataframe.to_sql(
