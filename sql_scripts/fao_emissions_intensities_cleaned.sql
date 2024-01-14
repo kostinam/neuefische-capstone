@@ -1,4 +1,4 @@
-CREATE TABLE fao_emissions_intensities_reduced AS (
+--CREATE TABLE fao_emissions_intensities_reduced AS (
 SELECT
 	area,
 	item,
@@ -38,4 +38,5 @@ GROUP BY
 	YEAR,
 	emissions_co2eq_unit,
 	emissions_intensity_unit,
-	production_unit)
+	production_unit
+--)

@@ -1,4 +1,4 @@
-CREATE TABLE fao_emis_crop_reduced AS (
+--CREATE TABLE fao_emissions_crops_cleaned AS (
 SELECT
 	h.area,
 	h.YEAR,
@@ -18,7 +18,7 @@ FROM
 		ELEMENT,
 		min(SOURCE) AS SOURCE
 	FROM
-		fao_emis_crop fec
+		fao_emissions_crops fec
 	WHERE
 		ELEMENT LIKE 'Crops total%'
 	GROUP BY
@@ -51,7 +51,7 @@ LEFT JOIN (
 			END AS emissions_N20,
 			'kt' AS emissions_unit
 		FROM
-			fao_emis_crop) AS t
+			fao_emissions_crops) AS t
 	GROUP BY
 		area,
 		YEAR,
@@ -71,4 +71,5 @@ GROUP BY
 	h.item,
 	h.item_code,
 	h.SOURCE,
-	emissions_unit)
+	emissions_unit
+--)
