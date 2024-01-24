@@ -1,4 +1,4 @@
---CREATE TABLE fao_production_and_emissions_new AS (
+--CREATE TABLE fao_production_and_emissions_new_2 AS (
 	SELECT
 		*,
 		CASE
@@ -31,7 +31,7 @@
 			yield_unit,
 			emissions_ch4 AS emissions_ch4_in_kt,
 			emissions_n20 AS emissions_n2o_in_kt,
-			round(CAST(emissions_ch4 * 28 + emissions_n20 * 298 AS NUMERIC), 4) AS emissions_co2eq_calc_in_kt,
+			round(CAST(emissions_ch4 * 28 + emissions_n20 * 265 AS NUMERIC), 4) AS emissions_co2eq_calc_in_kt,
 			CASE
 				WHEN production = 0 THEN NULL
 				ELSE round(CAST((emissions_ch4 * 28 + emissions_n20 * 265) * 1000 / production AS NUMERIC), 4)
