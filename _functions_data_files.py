@@ -18,7 +18,7 @@ def create_data_dir(
         return True
     else:
         try:
-            os.makedir(data_dir)
+            os.makedirs(data_dir)
             return True
         except Exception as e:
             print('ERROR! creating data dir failed:', e)
